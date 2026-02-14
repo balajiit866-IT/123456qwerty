@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Favorite Person ❤️</title>
+<style>
+body{
+margin:0;font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+height:100vh;display:flex;justify-content:center;align-items:center;
+color:#fff;text-align:center;overflow:hidden;
+}
+
+/* Stars */
+.star{position:absolute;color:white;animation:twinkle 2s infinite;}
+@keyframes twinkle{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
+
+/* Floating Hearts */
+.heart{position:absolute;font-size:20px;color:rgba(255,255,255,0.7);animation:float 6s linear infinite;}
+@keyframes float{0%{bottom:-10%;}100%{bottom:110%;}}
+
+.container{
+background:rgba(0,0,0,0.45);padding:35px;border-radius:25px;
+width:90%;max-width:520px;
+box-shadow:0 0 30px rgba(255,105,180,0.6);
+animation:zoomIn 1s ease;
+}
+@keyframes zoomIn{from{transform:scale(0.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+
+.section{display:none;}
+
+h1,p{animation:fadeUp 1s;}
+@keyframes fadeUp{from{transform:translateY(20px);opacity:0;}to{opacity:1;}}
+
+button{
+margin-top:25px;padding:12px 35px;border:none;border-radius:30px;
+background:#fff;color:#ff4f7a;font-size:1rem;cursor:pointer;
+box-shadow:0 0 10px pink;
+}
+
+.typing{border-right:2px solid white;white-space:nowrap;overflow:hidden;}
+
+.big-heart{font-size:4rem;animation:pulse 1s infinite;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.5);}100%{transform:scale(1);}}
+
+.name-glow{color:#ffb6c1;text-shadow:0 0 10px #ff69b4,0 0 30px #ff1493;}
+
+#noBtn{background:#ddd;color:#333;position:absolute;}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="star" style="left:10%;top:10%">✨</div>
+<div class="star" style="left:40%;top:30%">✨</div>
+<div class="star" style="left:70%;top:20%">✨</div>
+
+<!-- Hearts -->
+<div class="heart" style="left:10%">❤️</div>
+<div class="heart" style="left:30%">❤️</div>
+<div class="heart" style="left:50%">❤️</div>
+<div class="heart" style="left:70%">❤️</div>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c8cbb1d58.mp3">
+</audio>
+
+<div class="container">
+
+<div id="s1" class="section" style="display:block;">
+<h1 class="typing" id="t1"></h1>
+<button onclick="go('s2')">Open</button>
+</div>
+
+<div id="s2" class="section">
+<p class="typing" id="t2"></p>
+<button onclick="go('s3')">Next</button>
+</div>
+
+<div id="s3" class="section">
+<p class="typing" id="t3"></p>
+<button onclick="go('s4')">Next</button>
+</div>
+
+<div id="s4" class="section">
+<p class="typing" id="t4"></p>
+<button onclick="finalStep()">Reveal</button>
+</div>
+
+<div id="s5" class="section">
+<h1>I really like you Kushina 💖</h1>
+<h1 class="name-glow">You Are My Favorite Person</h1>
+<p>Will you be mine?</p>
+
+<div style="position:relative;height:120px;">
+<button onclick="yesClick()">Yes</button>
+<button id="noBtn" onmouseover="moveNo()">No</button>
+</div>
+
+<div class="big-heart">❤️</div>
+</div>
+
+</div>
+
+<script>
+const texts=["Hey You 😊","You changed my world","You are my favorite thought","So today I ask..."];
+
+function type(id,text){
+let i=0,e=document.getElementById(id);
+e.innerHTML="";
+let t=setInterval(()=>{
+if(i<text.length) e.innerHTML+=text[i++];
+else clearInterval(t);
+},70);
+}
+
+window.onload=()=>type("t1",texts[0]);
+
+function go(id){
+document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+document.getElementById(id).style.display='block';
+if(id=="s2")type("t2",texts[1]);
+if(id=="s3")type("t3",texts[2]);
+if(id=="s4")type("t4",texts[3]);
+}
+
+function finalStep(){
+document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+document.getElementById('s5').style.display='block';
+document.body.style.background="linear-gradient(135deg,#ff758c,#ff7eb3)";
+}
+
+function moveNo(){
+const btn=document.getElementById('noBtn');
+btn.style.left=Math.random()*80+'%';
+btn.style.top=Math.random()*80+'%';
+}
+
+function yesClick(){
+document.getElementById('s5').innerHTML=
+"<h1 class='name-glow'>She Said YES 😍💖</h1><div class='big-heart'>❤️</div>";
+}
+</script>
+
+</body>
+</html>
